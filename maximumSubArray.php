@@ -2,16 +2,27 @@
 
 // https://leetcode.com/problems/maximum-subarray/description/
 
+// To understand solution, give Kadane's algorithm a second look
+// https://www.youtube.com/watch?v=86CQq3pKSUw
 class Solution
 {
-
     /**
      * @param Integer[] $nums
      * @return Integer
      */
-    function maxSubArray($nums)
+    public function maxSubArray($nums)
     {
-        return 6;
+        $maxSumPossibleAtSpecificIndex = [];
+        $maxSumPossibleAtSpecificIndex[] = $nums[0];
+        $absoluteMax = $nums[0];
+        for ($i = 1; $i < count($nums); $i++) {
+            $previousMaxSum = $maxSumPossibleAtSpecificIndex[$i - 1];
+            $indexValue = $nums[$i];
+            $maxSumAtIndex =  $previousMaxSum + $indexValue > $indexValue ? $previousMaxSum + $indexValue : $indexValue;
+            $maxSumPossibleAtSpecificIndex[] = $maxSumAtIndex;
+            $absoluteMax = $absoluteMax > $maxSumAtIndex ? $absoluteMax : $maxSumAtIndex;
+        }
+        return $absoluteMax;
     }
 }
 

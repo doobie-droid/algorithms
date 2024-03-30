@@ -11,6 +11,14 @@ class Solution
      */
     function containsDuplicate($nums)
     {
+        $containsDuplicate = [];
+        foreach ($nums as $num) {
+            if (isset($containsDuplicate[$num])) {
+                return true;
+            }
+            $containsDuplicate[$num] = true;
+        }
+        return false;
     }
 }
 $solution = new Solution();
