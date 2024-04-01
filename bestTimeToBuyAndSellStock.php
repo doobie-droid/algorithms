@@ -4,13 +4,19 @@
 
 class Solution
 {
-
     /**
      * @param Integer[] $prices
      * @return Integer
      */
-    function maxProfit($prices)
+    public function maxProfit($prices)
     {
+        $lowestPriceBeforeDay = $prices[0];
+        $hashMapOfMaxProfits = [];
+        foreach($prices as $index => $priceToday) {
+            $lowestPriceBeforeDay = $priceToday < $lowestPriceBeforeDay ? $priceToday : $lowestPriceBeforeDay;
+            $hashMapOfMaxProfits[$index] = $priceToday - $lowestPriceBeforeDay;
+        }
+        return max($hashMapOfMaxProfits);
     }
 }
 

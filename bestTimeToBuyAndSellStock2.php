@@ -4,13 +4,24 @@
 
 class Solution
 {
-
     /**
      * @param Integer[] $prices
      * @return Integer
      */
-    function maxProfit($prices)
+    public function maxProfit($prices)
     {
+        $finalBuyingDay = count($prices) - 1;
+        $totalMaxProfit = 0;
+        foreach ($prices as $today => $price) {
+            $tomorrow = $today + 1;
+            if ($today < $finalBuyingDay && $prices[$tomorrow] > $prices[$today]) {
+                $buyPrice = $prices[$today];
+                $sellPrice = $prices[$tomorrow];
+                $profit = $sellPrice - $buyPrice;
+                $totalMaxProfit += $profit;
+            }
+        }
+        return $totalMaxProfit;
     }
 }
 
