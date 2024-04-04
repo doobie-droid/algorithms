@@ -6,6 +6,7 @@ class RandomizedSet
 {
     /**
      */
+    public $set = [];
     function __construct()
     {
     }
@@ -16,6 +17,11 @@ class RandomizedSet
      */
     function insert($val)
     {
+        if (isset($this->set[$val])) {
+            return false;
+        }
+        $this->set[$val] = $val;
+        return true;
     }
 
     /**
@@ -24,6 +30,11 @@ class RandomizedSet
      */
     function remove($val)
     {
+        if (!isset($this->set[$val])) {
+            return false;
+        }
+        unset($this->set[$val]);
+        return true;
     }
 
     /**
@@ -31,13 +42,19 @@ class RandomizedSet
      */
     function getRandom()
     {
+        $randomKey = array_rand($this->set);
+        $randomElement = $this->set[$randomKey];
+        return $randomElement;
     }
 }
 
-/**
- * Your RandomizedSet object will be instantiated and called as such:
- * $obj = RandomizedSet();
- * $ret_1 = $obj->insert($val);
- * $ret_2 = $obj->remove($val);
- * $ret_3 = $obj->getRandom();
- */
+
+//  Your RandomizedSet object will be instantiated and called as such:
+$obj = new  RandomizedSet();
+echo ($obj->insert(1)) . PHP_EOL;
+echo ($obj->remove(2)) . PHP_EOL;
+echo ($obj->insert(2)) . PHP_EOL;
+echo ($obj->getRandom()) . PHP_EOL;
+echo ($obj->remove(1)) . PHP_EOL;
+echo ($obj->insert(2)) . PHP_EOL;
+echo ($obj->getRandom()) . PHP_EOL;
