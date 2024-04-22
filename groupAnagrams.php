@@ -11,12 +11,35 @@ class Solution
      */
     function groupAnagrams($strs)
     {
+        $hashMapOfFoundAnagrams = [];
+        $solutionSet = [];
+        $lastIndexOfAnagramGroups = 0;
+        foreach ($strs as $index => $element) {
+            $sortedString = $this->sortString($element);
+            if (isset($hashMapOfFoundAnagrams[$sortedString])){
+                $indexOfAnagram = $hashMapOfFoundAnagrams[$sortedString];
+                array_push($solutionSet[$indexOfAnagram],$element);
+            }else{
+                $hashMapOfFoundAnagrams[$sortedString] = $lastIndexOfAnagramGroups;
+                $solutionSet[$lastIndexOfAnagramGroups] = [$element];
+                $lastIndexOfAnagramGroups++;
+            }
+        }
+        // echo json_encode($solutionSet);
+        return $solutionSet;
+    }
+
+    private function sortString($str)
+    {
+        $chars = str_split($str);
+        sort($chars);
+        $sortedString = implode('', $chars);
+
+        return $sortedString;
     }
 }
 
 $solution = new Solution();
-$strs = ["eat", "tea", "tan", "ate", "nat", "bat"];
-echo ($solution->groupAnagrams($strs) == [["bat"], ["nat", "tan"], ["ate", "eat", "tea"]] ? "PASSED" : "FAILED") . PHP_EOL;
 
 $solution = new Solution();
 $strs = [""];
