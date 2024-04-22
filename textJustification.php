@@ -5,19 +5,15 @@
 
 class Solution
 {
-
     /**
      * @param String[] $words
      * @param Integer $maxWidth
      * @return String[]
      */
-    function fullJustify($words, $maxWidth)
+    public function fullJustify($words, $maxWidth)
     {
-        return [
-            "This    is    an",
-            "example  of text",
-            "justification.  "
-        ];
+        $i = $j = 0;
+
     }
 }
 

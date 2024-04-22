@@ -5,14 +5,23 @@
 
 class Solution
 {
-
     /**
      * @param String $s
      * @param String $t
      * @return Boolean
      */
-    function isSubsequence($s, $t)
+    public function isSubsequence($s, $t)
     {
+        $i = 0;
+        for ($index = 0; $index < strlen($t); $index++) {
+            if ($t[$index] == $s[$i]) {
+                $i++;
+            }
+        }
+        if($i++ >= strlen($s)){
+            return true;
+        }
+        return false;
     }
 }
 
@@ -25,4 +34,6 @@ $s = "axc";
 $t = "ahbgdc";
 echo ($solution->isSubsequence($s, $t) == false ? "PASSED" : "FAILED") . PHP_EOL;
 
-
+$s = "b";
+$t = "c";
+echo ($solution->isSubsequence($s, $t) == false ? "PASSED" : "FAILED") . PHP_EOL;
